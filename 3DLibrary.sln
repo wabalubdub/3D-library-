@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boam3D", "src\Boam3D.csproj", "{921040EF-DE60-4535-8D76-AAD87D67B9BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boam3D", "src\library\Boam3D.csproj", "{921040EF-DE60-4535-8D76-AAD87D67B9BE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{A8AD3A3B-04EF-4A6C-8D61-E00722731F07}"
 EndProject
