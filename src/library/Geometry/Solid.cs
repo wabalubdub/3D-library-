@@ -41,28 +41,46 @@ namespace Boam3D.Geometry
 
         public static Solid ReadFromSTL (string s)
         {
+            
             Solid returnSolid=new Solid();
-            IEnumerator<string> lines = (IEnumerator<string>)s.Split('\n').AsEnumerable<string>().GetEnumerator();
-            lines.MoveNext();
-            if (!lines.Current.StartsWith("solid model")){
-                throw new Exception("unrecognized format, solid model isn't the first line");
-            }
-            try {lines.MoveNext();} catch {throw  new Exception("unrecognized format, no body");}
-            while (!lines.Current.StartsWith("endsolid model")){
+            string[] lines =s.Split('\n');
+            if (IsFormatIsValid(lines)){
+            for (int i = 1; i<lines.Length ; i+=7 )
+            {
                 StringBuilder facetString = new StringBuilder("");
-                while (!lines.Current.StartsWith( "endfacet"))
-                {
-                    facetString.Append(lines.Current);
+                for (int j = 0; j < 6; j++){
+                    facetString.Append(lines[i+j]);
                     facetString.Append("\n");
-                    try {lines.MoveNext();} catch {throw  new Exception("unrecognized format, no endfacet decleration");}
                 }
-                facetString.Append(lines.Current);
                 Facet nextFacet = Facet.ReadFromSTL(facetString.ToString());
                 returnSolid.AddFacet(nextFacet);
-                lines.MoveNext();
             }
             return returnSolid;
+            }
+            else throw new Exception("invalid format");
 
         }
+
+        private static bool IsFormatIsValid(string[] lines)
+                {
+                    if (lines.Length <2)
+                    {
+                        return false;
+                    }
+                    if (lines[0].Trim() != "solid model")
+                    {
+                        return false;
+                    }
+                    if (lines[lines.Length-1].Trim()!= "endsolid model")
+                    {
+                        return false; 
+                    }
+                    if (lines.Length%7!=2)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
     }
+
 }

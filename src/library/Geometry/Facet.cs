@@ -45,33 +45,56 @@ namespace Boam3D.Geometry
 
         public static Facet ReadFromSTL (string s)
         {
-            IEnumerator<string> lines = s.Split('\n').AsEnumerable<string>().GetEnumerator();
-            lines.MoveNext();
-            if (!lines.Current.StartsWith("facet normal")){ throw new Exception("facet, doesn't start with facet"); }
-            string normal =lines.Current.Substring(13);//remove the facet normal part
-            Vertex NormalVertex = Vertex.ReadFromSTL(normal);
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("outer loop")){throw new Exception("not correct format");} 
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("vertex ")){throw new Exception("not correct format");}
-            string vertex1str =lines.Current.Substring(7);
-            Vertex Vertex1 = Vertex.ReadFromSTL(vertex1str);
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("vertex ")){throw new Exception("not correct format");}
-            string vertex2str =lines.Current.Substring(7);
-            Vertex Vertex2 = Vertex.ReadFromSTL(vertex2str);
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("vertex ")){throw new Exception("not correct format");}
-            string vertex3str =lines.Current.Substring(7);
-            Vertex Vertex3 = Vertex.ReadFromSTL(vertex3str);
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("endloop")){throw new Exception("not correct format");}
-            if (!lines.MoveNext()){throw new Exception("not correct format"); }
-            if (!lines.Current.StartsWith("endfacet")){throw new Exception("not correct format");}
-            Facet returnFacet =  new Facet (Vertex1, Vertex2, Vertex3);
-            Vertex calculatedNormal = returnFacet.getNormal();
-            if (!calculatedNormal.Equals(NormalVertex)) {throw new Exception("normal is not correct");}
-            return returnFacet;
+            string[] lines = s.Split('\n');
+            if (IsFormatIsValid(lines))
+            {
+                string[] normal =System.Text.RegularExpressions.Regex.Split(lines[0], @"\s+");
+                Vertex NormalVertex = Vertex.ReadFromSTL($"{normal[2]} {normal[3]} {normal[4]}");
+                string[] vertex1str = System.Text.RegularExpressions.Regex.Split(lines[2], @"\s+");
+                Vertex Vertex1 = Vertex.ReadFromSTL($"{vertex1str[1]} {vertex1str[2]} {vertex1str[3]}");
+                string[] vertex2str =System.Text.RegularExpressions.Regex.Split(lines[3], @"\s+");
+                Vertex Vertex2 = Vertex.ReadFromSTL($"{vertex2str[1]} {vertex2str[2]} {vertex2str[3]}");
+                string[] vertex3str =System.Text.RegularExpressions.Regex.Split(lines[4], @"\s+");
+                Vertex Vertex3 = Vertex.ReadFromSTL($"{vertex3str[1]} {vertex3str[2]} {vertex3str[3]}");
+                Facet returnFacet =  new Facet (Vertex1, Vertex2, Vertex3);
+                Vertex calculatedNormal = returnFacet.getNormal();
+                if (!calculatedNormal.Equals(NormalVertex)) {throw new Exception("normal is not correct");}
+                return returnFacet;
+            }
+            else 
+            {
+                throw new Exception("not correct format");
+            }
+            
+        }
+
+        private static bool IsFormatIsValid(string[] lines)
+        {
+            if (lines.Length!=7) 
+            {
+                return false;
+            }
+            if (!lines[0].StartsWith("facet normal "))
+            {
+                return false;
+            }
+            if (lines[1].Trim()!="outer loop")
+            {
+                return false;
+            }
+            if (!(lines[2].StartsWith("vertex ")&&lines[3].StartsWith("vertex ")&&lines[4].StartsWith("vertex ")))
+            {
+                return false;
+            }
+            if (lines[5].Trim()!="endloop")
+            {
+                return false;
+            }
+            if (lines[6].Trim()!="endfacet")
+            {
+                return false;
+            }
+            return true;
         }
     }
 
