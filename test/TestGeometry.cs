@@ -1,11 +1,13 @@
 using System.Runtime.Intrinsics;
 using Boam3D.Geometry;
+using System.IO;
+using Newtonsoft.Json.Linq;
 namespace test;
 
 public class TestGeometry
 {
     [Fact]
-    public void runFirtsTest()
+    public void RunFirstTest()
     {
         //Arrange
         //Act
@@ -49,8 +51,19 @@ public class TestGeometry
         Assert.Equal(0.824,v1.x,0.01);Assert.Equal(0.137,v1.y,0.01);Assert.Equal(-0.549,v1.z,0.01);
         Assert.Equal(0,v2.x,0.01);Assert.Equal(0,v2.y,0.01);Assert.Equal(1, v2.z,0.01);
         Assert.Equal(0.577,v3.x,0.01);
+    }
 
-
+    [Fact]
+    public void TestLoadSolidFacet()
+    {
+        //Arrange 
+        StreamReader Sr = new StreamReader(".\\..\\..\\..\\test utilities\\20mm_cube.stl");
+        string line = Sr.ReadToEnd();
+        //Act
+        Solid shape = Solid.ReadFromSTL(line);
+        //Assert
+        Assert.IsType<Solid>(shape);
+        Assert.Equal(Solid.CountFacets(),12);
     }
 
 

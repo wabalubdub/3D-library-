@@ -39,10 +39,26 @@ namespace Boam3D.Geometry
         public override string ToString(){
             return $"{x} {y} {z}";
         }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Vertex Vertex)
+            {
+                return (this.x == Vertex.x) && (this.y == Vertex.y) && (this.z == Vertex.z);
+            }
+            else{
+            return base.Equals(obj);
+            }
+        }
 
         public static Vertex Cross ( Vertex v1, Vertex v2)
         {
                 return new Vertex( v1.y*v2.z-v1.z*v2.y,v1.z*v2.x-v1.x*v2.z,v1.x*v2.y-v1.y*v2.x);
+        }
+
+        public static Vertex ReadFromSTL (string s)
+        {
+            double[] veticies = s.Split(' ').Select(x=>Double.Parse(x)).ToArray();
+            return new Vertex( veticies[0],veticies[1],veticies[2] );
         }
     }
 }

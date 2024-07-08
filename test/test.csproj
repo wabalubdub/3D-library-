@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Boam3D.csproj" />
+    <ProjectReference Include="..\src\library\Boam3D.csproj" />
   </ItemGroup>
 
 </Project>
