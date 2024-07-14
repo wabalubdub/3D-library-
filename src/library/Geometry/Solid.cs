@@ -29,13 +29,18 @@ namespace Boam3D.Geometry
             
         }
         public IEnumerable<Vertex> getVertecies(){
-                throw new NotImplementedException();
+                foreach(Facet facet in facets){
+                    foreach(Vertex vertex in facet.GetVerticies()){
+                        yield return vertex;
+                    }
+                } //this returns dupes todo fix
         }
 
         public bool hasVertex(Vertex vertex) {
-            throw new NotImplementedException();
+            return this.getVertecies().Contains(vertex);
         }
-                public override string ToString(){
+
+        public override string ToString(){
             StringBuilder sb = new StringBuilder();
             sb.Append("solid model\n");
             foreach (Facet facet in facets){
@@ -60,13 +65,14 @@ namespace Boam3D.Geometry
             Solid returnSolid=new Solid();
             string[] lines =s.Split('\n');
             if (IsFormatIsValid(lines)){
-            for (int i = 1; i<lines.Length ; i+=7 )
+            for (int i = 1; i+7<lines.Length ; i+=7 )
             {
                 StringBuilder facetString = new StringBuilder("");
                 for (int j = 0; j < 6; j++){
                     facetString.Append(lines[i+j]);
                     facetString.Append("\n");
                 }
+                facetString.Append(lines[i+6]);
                 Facet nextFacet = Facet.ReadFromSTL(facetString.ToString());
                 returnSolid.AddFacet(nextFacet);
             }

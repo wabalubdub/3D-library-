@@ -2,24 +2,17 @@ using System.Runtime.Intrinsics;
 using Boam3D.Geometry;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using Boam3D.Test.utilities;
 namespace test{
 
     public class TestGeometry
     {
-        [Fact]
-        public void RunFirstTest()
-        {
-            //Arrange
-            //Act
-            //Assert
-            Assert.Equal(1,1);
-        }
 
         [Fact]
         public void TestGetNormalFacet()
         {
         //Arrange
-        Facet f = buildFacetOnXYPlane();
+        Facet f = TestUtilities.buildFacetOnXYPlane();
             //Act
             Vertex v1 = f.getNormal();
             //Assert
@@ -27,14 +20,7 @@ namespace test{
             Assert.Equal(0,v1.y,0.01);
             Assert.Equal(1,v1.z,0.01);
         }
-        public static Facet buildFacetOnXYPlane()
-        {
-            Vertex v1 = new Vertex(0,0,0);
-            Vertex v2 = new Vertex(1,0,0);
-            Vertex v3 = new Vertex(0,1,0);
-            return new Facet(v1, v2, v3);
-        }
-
+        
         [Theory]
         [InlineData (30,5,-20,0.824,0.137,-0.549)]
         [InlineData(0,0,10,0,0,1)]
@@ -52,24 +38,44 @@ namespace test{
             Assert.Equal(expectedX,v.x,0.01);Assert.Equal(expectedY,v.y,0.01);Assert.Equal(expectedZ,v.z,0.01);
         }
 
-        [Fact]
-        public void TestLoadSolidFacet()
+        [Theory]
+        [InlineData(".\\..\\..\\..\\test utilities\\pyramid.stl", 4)]
+        public void TestLoadSolidFacet(string pathToFile, int numberOfFacets)
         {
-            //Arrange 
-            StreamReader Sr = new StreamReader(".\\..\\..\\..\\test utilities\\20mm_cube.stl");
-            string cubeString = Sr.ReadToEnd();
-            Sr = new StreamReader(".\\..\\..\\..\\test utilities\\pyramid.stl");
-            string pyramidString = Sr.ReadToEnd();
-            //Act
-            Solid cube = Solid.ReadFromSTL(cubeString);
-            Solid pyramid = Solid.ReadFromSTL(pyramidString);
+            //Arrange  //Act
+            Solid Shape = TestUtilities.GenerateSolidShape(pathToFile);
+            
             //Assert
-            Assert.IsType<Solid>(cube);
-            Assert.Equal(12,cube.CountFacets());
-
-            Assert.IsType<Solid>(cube);
-            Assert.Equal(4, pyramid.CountFacets());
+            Assert.IsType<Solid>(Shape);
+            Assert.Equal(numberOfFacets,Shape.CountFacets());
+        }
+        
+        [Fact]
+        public void TestgetVertecies()
+        {
+            // Given
+            throw new NotImplementedException();
+        
+            // When
+        
+            // Then
         }
 
+        [Theory]
+        [InlineData(".\\..\\..\\..\\test utilities\\pyramid.stl", 0,0,0,1,1,1)]
+        public void TesthasVertex(string pathToFile, double vertexInShapeX, double vertexInShapeY, double vertexInShapeZ, double vertexNotInShapeX, double vertexNotInShapeY,double vertexNotInShapeZ)
+        {
+            // Given
+            Vertex VertexInShape = new Vertex(vertexInShapeX,vertexInShapeY,vertexInShapeZ);
+            Vertex VertexNotInShape = new Vertex(vertexNotInShapeX, vertexNotInShapeY, vertexNotInShapeZ);
+            Solid shape = TestUtilities.GenerateSolidShape(pathToFile);
+            // When
+            bool ShapeHasVertexInShape = shape.hasVertex(VertexInShape);
+            bool ShapeDosentHaveVertexNotInShape = shape.hasVertex(VertexNotInShape);
+        
+            // Then
+            Assert.True(ShapeHasVertexInShape);
+            Assert.False(ShapeDosentHaveVertexNotInShape);
+        }
     }
 }
