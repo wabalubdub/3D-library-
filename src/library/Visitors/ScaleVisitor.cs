@@ -14,8 +14,10 @@ namespace Boam3D.Visitors
             this.ScaleZ = ScaleZ;
         } 
 
-        public override void VisitVertex(Vertex visitor){
-            throw new NotImplementedException();
+        public override void VisitVertex(Vertex vertex){
+            vertex.x *= ScaleX;
+            vertex.y *= ScaleY;
+            vertex.z *= ScaleZ;
         }
     }
 }

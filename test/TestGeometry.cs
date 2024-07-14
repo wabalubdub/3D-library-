@@ -50,8 +50,7 @@ namespace test{
             Assert.Equal(numberOfFacets,Shape.CountFacets());
         }
         
-        [Fact]
-        public void TestgetVertecies()
+        public void TestgetVertecies() // missing this test because im not sure what i want this function to do exactly
         {
             // Given
             throw new NotImplementedException();

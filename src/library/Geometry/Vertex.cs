@@ -5,9 +5,9 @@ namespace Boam3D.Geometry
 {
     public class Vertex:IGeometry
     {
-        public double x{ get; private set; }
-        public double y{ get; private set; }
-        public double z{ get; private set; }
+        public double x{ get; protected internal set; }
+        public double y{ get; protected internal set; }
+        public double z{ get; protected internal set; }
         private double Length; 
 
         public Vertex( double x, double y, double z ) 

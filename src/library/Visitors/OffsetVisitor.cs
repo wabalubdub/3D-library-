@@ -13,8 +13,10 @@ namespace Boam3D.Visitors
             this.OffsetZ = OffsetZ;
         } 
 
-        public override void VisitVertex(Vertex visitor){
-            throw new NotImplementedException();
+        public override void VisitVertex(Vertex vertex){
+            vertex.x += OffsetX;
+            vertex.y += OffsetY;
+            vertex.z += OffsetZ;
         }
 
     }
