@@ -58,13 +58,18 @@ public class TestGeometry
     {
         //Arrange 
         StreamReader Sr = new StreamReader(".\\..\\..\\..\\test utilities\\20mm_cube.stl");
-        string line = Sr.ReadToEnd();
+        string cubeString = Sr.ReadToEnd();
+        Sr = new StreamReader(".\\..\\..\\..\\test utilities\\pyramid.stl");
+        string pyramidString = Sr.ReadToEnd();
         //Act
-        Solid shape = Solid.ReadFromSTL(line);
+        Solid cube = Solid.ReadFromSTL(cubeString);
+        Solid pyramid = Solid.ReadFromSTL(pyramidString);
         //Assert
-        Assert.IsType<Solid>(shape);
-        Assert.Equal(Solid.CountFacets(),12);
-    }
+        Assert.IsType<Solid>(cube);
+        Assert.Equal(12,cube.CountFacets());
 
+        Assert.IsType<Solid>(cube);
+        Assert.Equal(4, pyramid.CountFacets());
+    }
 
 }
