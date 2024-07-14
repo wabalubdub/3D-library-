@@ -8,7 +8,6 @@ namespace Boam3D.Geometry
         public double x{ get; private set; }
         public double y{ get; private set; }
         public double z{ get; private set; }
-
         private double Length; 
 
         public Vertex( double x, double y, double z ) 
@@ -23,11 +22,6 @@ namespace Boam3D.Geometry
         {
             this.Length = (double)Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
         }
-
-        public static Vertex subtract( Vertex v1, Vertex v2){
-            return new Vertex(  v1.x - v2.x,  v1.y - v2.y, v1.z - v2.z );
-        }
-
         public void normalize()
         {
             this.x = this.x/this.Length;
@@ -36,6 +30,7 @@ namespace Boam3D.Geometry
             this.Length = 1;
 
         }
+
         public override string ToString(){
             return $"{x} {y} {z}";
         }
@@ -49,6 +44,9 @@ namespace Boam3D.Geometry
             return base.Equals(obj);
             }
         }
+         public override int GetHashCode(){
+            return base.GetHashCode();
+         }
 
         public static Vertex Cross ( Vertex v1, Vertex v2)
         {
@@ -60,5 +58,11 @@ namespace Boam3D.Geometry
             double[] veticies = s.Split(' ').Select(x=>Double.Parse(x)).ToArray();
             return new Vertex( veticies[0],veticies[1],veticies[2] );
         }
+
+        public static Vertex subtract( Vertex v1, Vertex v2){
+
+            return new Vertex(  v1.x - v2.x,  v1.y - v2.y, v1.z - v2.z );
+        }
+        
     }
 }
