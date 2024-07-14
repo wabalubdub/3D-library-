@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
-
+using Boam3D.Visitors;
 namespace Boam3D.Geometry
 {
-    public class Vertex
+    public class Vertex:IGeometry
     {
         public double x{ get; private set; }
         public double y{ get; private set; }
@@ -48,6 +48,9 @@ namespace Boam3D.Geometry
             return base.GetHashCode();
          }
 
+        public void Accept(GeometryVisitor geometryVisitor){
+            geometryVisitor.VisitVertex(this);
+        }
         public static Vertex Cross ( Vertex v1, Vertex v2)
         {
                 return new Vertex( v1.y*v2.z-v1.z*v2.y,v1.z*v2.x-v1.x*v2.z,v1.x*v2.y-v1.y*v2.x);

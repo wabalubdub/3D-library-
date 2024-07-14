@@ -1,10 +1,11 @@
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Boam3D.Visitors;
 
 namespace Boam3D.Geometry
     {
-    public class Facet 
+    public class Facet : IGeometry
     {
         private Vertex v1;
         private Vertex v2;
@@ -31,6 +32,13 @@ namespace Boam3D.Geometry
             return normal;
         }
 
+        public void Accept(GeometryVisitor visitor)
+        {
+            visitor.VisitFacet(this);
+            v1.Accept(visitor);
+            v2.Accept(visitor);
+            v3.Accept(visitor);
+        }
         public override string ToString (){
             StringBuilder sb = new StringBuilder();
             sb.Append($"facet normal {this.getNormal()}\n");

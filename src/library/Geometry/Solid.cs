@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Text;
+using Boam3D.Visitors;
 
 namespace Boam3D.Geometry
 {
-    public class Solid 
+    public class Solid :IGeometry
     {
         private List<Facet> facets;
 
@@ -39,6 +40,14 @@ namespace Boam3D.Geometry
             return sb.ToString();
         }
 
+        public void Accept( GeometryVisitor visitor)
+        {
+            visitor.VisitSolid(this);
+            foreach (Facet facet in facets)
+            {
+                facet.Accept(visitor);
+            }
+        }
         public static Solid ReadFromSTL (string s)
         {
             
@@ -81,6 +90,8 @@ namespace Boam3D.Geometry
                     }
                     return true;
                 }
+
+
     }
 
 }
