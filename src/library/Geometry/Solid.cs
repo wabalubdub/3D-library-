@@ -28,8 +28,14 @@ namespace Boam3D.Geometry
             return facets.Count;
             
         }
+        public IEnumerable<Vertex> getVertecies(){
+                throw new NotImplementedException();
+        }
 
-        public override string ToString(){
+        public bool hasVertex(Vertex vertex) {
+            throw new NotImplementedException();
+        }
+                public override string ToString(){
             StringBuilder sb = new StringBuilder();
             sb.Append("solid model\n");
             foreach (Facet facet in facets){
