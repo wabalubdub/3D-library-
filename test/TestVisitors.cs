@@ -10,8 +10,8 @@ namespace test{
     public class TestVisitors
     {
         [Theory]
-        [InlineData(1,2,3,".\\..\\..\\..\\test utilities\\pyramid.stl")] // pyramid with edges (000) (100) (010) (001)
-        [InlineData(0,0,0,".\\..\\..\\..\\test utilities\\pyramid.stl")]
+        [InlineData(1,2,3,"../../../test utilities/pyramid.stl")] // pyramid with edges (000) (100) (010) (001)
+        [InlineData(0,0,0,"../../../test utilities/pyramid.stl")]
         public void testOffsetVisitor(double XOffset,double YOffset, double ZOffset,string pathToFile)
         {
             //Arrange
@@ -32,8 +32,8 @@ namespace test{
 
         }
         [Theory]
-        [InlineData(1,2,3,".\\..\\..\\..\\test utilities\\pyramid.stl")] // pyramid with edges (000) (100) (010) (001)
-        [InlineData(0,0,0,".\\..\\..\\..\\test utilities\\pyramid.stl")]
+        [InlineData(1,2,3,"../../../test utilities/pyramid.stl")] // pyramid with edges (000) (100) (010) (001)
+        [InlineData(0,0,0,"../../../test utilities/pyramid.stl")]
         public void testscaleVisitor(double XScale,double YScale, double ZScale,string pathToFile)
         {
             //Arrange
