@@ -39,7 +39,7 @@ namespace test{
         }
 
         [Theory]
-        [InlineData(".\\..\\..\\..\\test utilities\\pyramid.stl", 4)]
+        [InlineData("../../../test utilities/pyramid.stl", 4)]
         public void TestLoadSolidFacet(string pathToFile, int numberOfFacets)
         {
             //Arrange  //Act
@@ -62,7 +62,7 @@ namespace test{
         }
 
         [Theory]
-        [InlineData(".\\..\\..\\..\\test utilities\\pyramid.stl", 0,0,0,1,1,1)]
+        [InlineData("../../../test utilities/pyramid.stl", 0,0,0,1,1,1)]
         public void TesthasVertex(string pathToFile, double vertexInShapeX, double vertexInShapeY, double vertexInShapeZ, double vertexNotInShapeX, double vertexNotInShapeY,double vertexNotInShapeZ)
         {
             // Given
