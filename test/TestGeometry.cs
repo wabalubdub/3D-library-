@@ -50,6 +50,7 @@ namespace test{
             Assert.Equal(numberOfFacets,Shape.CountFacets());
         }
         
+        [Fact(Skip="unsure what this method should do (*repeating vertices)")]
         public void TestgetVertecies() // missing this test because im not sure what i want this function to do exactly
         {
             // Given
