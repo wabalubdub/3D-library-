@@ -28,7 +28,7 @@ namespace Boam3D.Geometry
             return facets.Count;
             
         }
-        public IEnumerable<Vertex> getVertecies(){
+        public IEnumerable<Vertex> GetVertices(){
                 foreach(Facet facet in facets){
                     foreach(Vertex vertex in facet.GetVerticies()){
                         yield return vertex;
@@ -37,7 +37,7 @@ namespace Boam3D.Geometry
         }
 
         public bool hasVertex(Vertex vertex) {
-            return this.getVertecies().Contains(vertex);
+            return this.GetVertices().Contains(vertex);
         }
 
         public override string ToString(){

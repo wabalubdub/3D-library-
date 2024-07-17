@@ -17,7 +17,7 @@ namespace test{
             //Arrange
             OffsetVisitor offsetVisitor = new OffsetVisitor(XOffset, YOffset, ZOffset);
             Solid pyramid = TestUtilities.GenerateSolidShape(pathToFile); 
-            IEnumerable<Vertex> Vertexs = pyramid.getVertecies();
+            IEnumerable<Vertex> Vertexs = pyramid.GetVertices();
             Vertex[] TestVertecies =Vertexs.Select(ver=> new Vertex(ver.x+XOffset,ver.y+YOffset,ver.z+ZOffset)).ToArray();
             // Act
             pyramid.Accept(offsetVisitor);
@@ -39,7 +39,7 @@ namespace test{
             //Arrange
             ScaleVisitor offsetVisitor = new ScaleVisitor(XScale, YScale, ZScale);
             Solid pyramid = TestUtilities.GenerateSolidShape(pathToFile); 
-            IEnumerable<Vertex> Vertexs = pyramid.getVertecies();
+            IEnumerable<Vertex> Vertexs = pyramid.GetVertices();
             Vertex[] TestVertecies =Vertexs.Select(ver=> new Vertex(ver.x*XScale,ver.y*YScale,ver.z*ZScale)).ToArray();
             // Act
             pyramid.Accept(offsetVisitor);
