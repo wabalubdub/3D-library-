@@ -29,11 +29,15 @@ namespace Boam3D.Geometry
             
         }
         public IEnumerable<Vertex> GetVertices(){
+            List<Vertex> returned_vertex = new List<Vertex>();
                 foreach(Facet facet in facets){
                     foreach(Vertex vertex in facet.GetVerticies()){
-                        yield return vertex;
+                        if (!returned_vertex.Contains(vertex)){
+                            returned_vertex.Add(vertex);
+                            yield return vertex;
+                        }
                     }
-                } //this returns dupes todo fix
+                } 
         }
 
         public bool hasVertex(Vertex vertex) {

@@ -50,8 +50,8 @@ namespace test{
             Assert.Equal(numberOfFacets,Shape.CountFacets());
         }
         
-        [Fact(Skip="unsure what this method should do (*repeating vertices)")]
-        public void TestgetVertecies() // missing this test because im not sure what i want this function to do exactly
+        [Fact]
+        public void TestgetVertecies() 
         {
             // Arrange
             Vertex v1 = new Vertex(0,0,0);
@@ -91,9 +91,6 @@ namespace test{
             Assert.Contains(v2,fourFacetVertexes);
             Assert.Contains(v3,fourFacetVertexes);
             Assert.Contains(v4,fourFacetVertexes);
-
-
-
         }
 
         [Theory]
