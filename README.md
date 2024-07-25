@@ -28,15 +28,14 @@ Things like listing vertices in a a facet of facets in a solid, and basic functi
 
 In addition this data structure will support the Visitor pattern with an associated Accept method. This pattern will allow the Visitors created in this project to preform the various editing functions that and classic design software would allow.
 
-- Visitors
+- Visitors -
   The visitors will allow the client to preform many operations on the solid from the basic offset and stretching to centering, selecting and more. they are implemented through the Visitor pattern according to the literature.
 
-- Creation
+- Creation -
   I haven't yet decided on how to create basic models, possibly using the Builder and/or Prototype design patterns so clients can build models that they will register and be able to use as models to build upon.
 
-- client
-
-I need to work on the clients description.
+- client -
+  I need to work on the clients description.
 
 # MVP
 
