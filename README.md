@@ -21,12 +21,11 @@ There are more rules on shapes that make them valid for 3D printing like Solids 
 
 I will describe the basic Design employed in this project so anyone reading may follow, this Design may change as the project evolves I will update this chapter needed:
 
-- Data
+- Data -
+  Data in this project will be represented in data model classes for Solids, Facets and Vertices. These classes will have basic functionality and are mostly for storing data and not for abstracting complex algorithmic procedures.
+  Things like listing vertices in a a facet of facets in a solid, and basic functions that have to do with the data structure.
 
-Data in this project will be represented in data model classes for Solids, Facets and Vertices. These classes will have basic functionality and are mostly for storing data and not for abstracting complex algorithmic procedures.
-Things like listing vertices in a a facet of facets in a solid, and basic functions that have to do with the data structure.
-
-In addition this data structure will support the Visitor pattern with an associated Accept method. This pattern will allow the Visitors created in this project to preform the various editing functions that and classic design software would allow.
+  In addition this data structure will support the Visitor pattern with an associated Accept method. This pattern will allow the Visitors created in this project to preform the various editing functions that and classic design software would allow.
 
 - Visitors -
   The visitors will allow the client to preform many operations on the solid from the basic offset and stretching to centering, selecting and more. they are implemented through the Visitor pattern according to the literature.
