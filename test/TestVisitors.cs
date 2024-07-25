@@ -38,15 +38,15 @@ namespace test{
         {
             //Arrange
             ScaleVisitor offsetVisitor = new ScaleVisitor(XScale, YScale, ZScale);
-            Solid pyramid = TestUtilities.GenerateSolidShape(pathToFile); 
-            IEnumerable<Vertex> Vertexs = pyramid.GetVertices();
+            Solid shape = TestUtilities.GenerateSolidShape(pathToFile); 
+            IEnumerable<Vertex> Vertexs = shape.GetVertices();
             Vertex[] TestVertecies =Vertexs.Select(ver=> new Vertex(ver.x*XScale,ver.y*YScale,ver.z*ZScale)).ToArray();
             // Act
-            pyramid.Accept(offsetVisitor);
+            shape.Accept(offsetVisitor);
 
             //Assert
             foreach (Vertex v in TestVertecies){
-                Assert.True(pyramid.hasVertex(v));
+                Assert.True(shape.hasVertex(v));
             }
         }
     }
